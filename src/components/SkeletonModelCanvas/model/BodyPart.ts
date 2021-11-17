@@ -1,0 +1,16 @@
+export enum BodyPart {
+    trunk = 'trunk',
+    head = 'head',
+    leftUpperArm = 'leftUpperArm',
+    leftLowerArm = 'leftLowerArm',
+    leftHand = 'leftHand',
+    leftThigh = 'leftThigh',
+    leftCalf = 'leftCalf',
+    leftFoot = 'leftFoot',
+    rightUpperArm = 'rightUpperArm',
+    rightLowerArm = 'rightLowerArm',
+    rightHand = 'rightHand',
+    rightThigh = 'rightThigh',
+    rightCalf = 'rightCalf',
+    rightFoot = 'rightFoot',
+}

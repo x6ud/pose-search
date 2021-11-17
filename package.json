@@ -1,0 +1,34 @@
+{
+  "name": "pose-search",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build"
+  },
+  "author": "x6ud",
+  "license": "MIT",
+  "dependencies": {
+    "@mediapipe/pose": "^0.5.1635988162",
+    "@vicons/antd": "^0.11.0",
+    "gl-matrix": "^3.4.3",
+    "naive-ui": "^2.20.2",
+    "sql.js": "^1.6.2",
+    "vue": "^3.2.16",
+    "vue-router": "^4.0.11"
+  },
+  "devDependencies": {
+    "@types/multiparty": "0.0.33",
+    "@types/node": "^16.11.6",
+    "@types/sql.js": "^1.4.3",
+    "@types/url-parse": "^1.4.4",
+    "@vitejs/plugin-vue": "^1.9.3",
+    "multiparty": "^4.2.2",
+    "rollup-plugin-copy": "^3.4.0",
+    "sass": "^1.43.3",
+    "typescript": "^4.4.3",
+    "url-parse": "^1.5.3",
+    "vite": "^2.6.4",
+    "vite-plugin-string": "^1.0.1",
+    "vue-tsc": "^0.3.0"
+  }
+}

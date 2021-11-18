@@ -15,6 +15,7 @@ import MatchChest from './impl/MatchChest';
 import MatchCrotch from './impl/MatchCrotch';
 import MatchElbow from './impl/MatchElbow';
 import MatchElbowCameraUnrelated from './impl/MatchElbowCameraUnrelated';
+import MatchFace from './impl/MatchFace';
 import MatchHip from './impl/MatchHip';
 import MatchHipCameraUnrelated from './impl/MatchHipCameraUnrelated';
 import MatchKnee from './impl/MatchKnee';
@@ -30,6 +31,10 @@ const matchers: {
         highlights: BodyPart[],
     }
 } = {
+    'Face': {
+        matcher: new MatchFace(),
+        highlights: [BodyPart.head]
+    },
     'Chest': {
         matcher: new MatchChest(),
         highlights: [BodyPart.trunk]
@@ -129,10 +134,11 @@ export default defineComponent({
             }
         });
 
-        function search() {
+        async function search() {
             try {
                 searching.value = true;
                 searchResult.value = [];
+                await nextTick();
                 const bodyPartMatchers = matchers[bodyPart.value!];
                 if (bodyPartMatchers) {
                     let list = photos;

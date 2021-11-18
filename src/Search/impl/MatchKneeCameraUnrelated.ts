@@ -5,7 +5,7 @@ import Photo from '../../utils/Photo';
 import {avg, getAngle, getNormal, getNormalInLocalSpace} from './math';
 import {MatchResult, PoseMatcher} from './search';
 
-const MAX_WORLD_SPACE_ANGLE_ERROR = Math.PI / 180 * 45;
+const MAX_WORLD_SPACE_ANGLE_ERROR = Math.PI / 180 * 60;
 
 export default class MatchKneeCameraUnrelated implements PoseMatcher {
 

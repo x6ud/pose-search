@@ -17,7 +17,7 @@ import {
 import {MatchResult, PoseMatcher} from './search';
 
 const MAX_VIEW_ANGLE_ERROR = Math.PI / 180 * 45;
-const MAX_WORLD_SPACE_ANGLE_ERROR = Math.PI / 180 * 45;
+const MAX_WORLD_SPACE_ANGLE_ERROR = Math.PI / 180 * 60;
 
 const Z_AXIS: [number, number, number] = [0, 0, 1];
 

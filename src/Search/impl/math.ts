@@ -105,3 +105,7 @@ export function cross(a: ReadonlyVec3, b: ReadonlyVec3) {
     vec3.cross(ret, a, b);
     return ret;
 }
+
+export function isWithinBoundary2D(point: ReadonlyVec3) {
+    return point[0] >= 0 && point[0] <= 1 && point[1] >= 0 && point[1] <= 1;
+}

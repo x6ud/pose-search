@@ -5,7 +5,7 @@ import Photo from '../../utils/Photo';
 import {avg, flipX, getNormal, getNormalInLocalSpace, mid, normalizedLandmarkToViewSpace} from './math';
 import {MatchResult, PoseMatcher} from './search';
 
-const MAX_WORLD_SPACE_ANGLE_ERROR = Math.PI / 180 * 30;
+const MAX_WORLD_SPACE_ANGLE_ERROR = Math.PI / 180 * 45;
 const MAX_VIEW_SPACE_ANGLE_ERROR = Math.PI / 180 * 45;
 
 export default class MatchShoulder implements PoseMatcher {

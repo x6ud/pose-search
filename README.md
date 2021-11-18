@@ -22,9 +22,8 @@ npm run build
 
 ## Adding data
 
-Run the project with `npm run dev`.
-
 Get an app key from `https://unsplash.com/oauth/applications`.
 
-Open `/#/editor`, paste your app key into the textbox requesting it.
+Run the project with `npm run dev`.
 
+Open `/#/editor`, paste your app key into the textbox requesting it.

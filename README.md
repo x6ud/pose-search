@@ -8,8 +8,6 @@ npm install
 
 ## Development
 
-Run `npm run build` first to copy some library files from /node_modules to /public.
-
 ```
 npm run dev
 ```

@@ -11,10 +11,6 @@ const router = createRouter({
             path: '/editor',
             component: () => import('./Editor/Editor.vue')
         },
-        {
-            path: '/db-manager',
-            component: () => import('./DbManager/DbManager.vue')
-        },
     ]
 });
 

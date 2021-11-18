@@ -49,6 +49,4 @@ export default class Photo {
     normalizedLandmarks: { point: [number, number, number], visibility: number }[] = [];
     /** @see https://google.github.io/mediapipe/solutions/pose.html */
     worldLandmarks: { point: [number, number, number], visibility: number }[] = [];
-
-    tags?: string[];
 }

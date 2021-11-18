@@ -144,12 +144,6 @@
                             </n-radio>
                         </div>
                     </div>
-                    <div class="form-item" v-if="photo.tags?.length">
-                        <label>Tags</label>
-                        <div class="value">
-                            <n-tag v-for="tag in photo.tags" size="small">{{ tag }}</n-tag>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="cols" style="justify-content: flex-end;">
@@ -175,12 +169,12 @@
             <n-button size="tiny"
                       type="primary"
                       :loading="dbLoading"
-                      @click="saveDatabase"
+                      @click="saveDataJson"
             >
                 <template #icon>
                     <save-filled/>
                 </template>
-                Save data.db
+                Save data.json
             </n-button>
         </div>
     </div>

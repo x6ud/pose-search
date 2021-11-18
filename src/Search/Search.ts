@@ -1,6 +1,6 @@
 import {WarningOutlined} from '@vicons/antd';
 import {NButton, NIcon, NRadio, NRadioGroup, NSelect} from 'naive-ui';
-import {defineComponent, onMounted, ref, nextTick} from 'vue';
+import {defineComponent, nextTick, onMounted, ref} from 'vue';
 import ImageClip from '../components/ImageClip/ImageClip.vue';
 import ImageViewer from '../components/ImageViewer/ImageViewer.vue';
 import {BodyPart} from '../components/SkeletonModelCanvas/model/BodyPart';
@@ -8,9 +8,9 @@ import SkeletonModel from '../components/SkeletonModelCanvas/model/SkeletonModel
 import SkeletonModelCanvas from '../components/SkeletonModelCanvas/SkeletonModelCanvas.vue';
 import {MAX_NUM_OF_SEARCH_RESULTS} from '../config';
 import {isMouseSupported, isWebGL2Supported} from '../utils/browser-support';
-import PhotoDatabase from '../utils/db/PhotoDatabase';
 import DraggableCamera from '../utils/DraggableCamera';
 import Photo from '../utils/Photo';
+import PhotoDataset from '../utils/PhotoDataset';
 import MatchChest from './impl/MatchChest';
 import MatchCrotch from './impl/MatchCrotch';
 import MatchElbow from './impl/MatchElbow';
@@ -103,7 +103,7 @@ export default defineComponent({
         const supportWebGL2 = isWebGL2Supported();
         const supportMouse = isMouseSupported();
 
-        const database = new PhotoDatabase();
+        const dataset = new PhotoDataset();
         const model = new SkeletonModel();
         const camera = new DraggableCamera();
 
@@ -116,7 +116,6 @@ export default defineComponent({
         const cameraRelated = ref(1);
 
         const searching = ref(false);
-        let photos: Photo[] = [];
         const searchResult = ref<SearchResult[]>();
 
         const showImageViewer = ref(false);
@@ -127,8 +126,7 @@ export default defineComponent({
             try {
                 dbLoading.value = true;
                 await nextTick();
-                await database.init();
-                photos = database.queryAllPhotos();
+                await dataset.load();
             } finally {
                 dbLoading.value = false;
             }
@@ -141,7 +139,7 @@ export default defineComponent({
                 await nextTick();
                 const bodyPartMatchers = matchers[bodyPart.value!];
                 if (bodyPartMatchers) {
-                    let list = photos;
+                    let list = dataset.data;
                     if (gender.value) {
                         list = list.filter(photo => photo.gender === gender.value);
                     }

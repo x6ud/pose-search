@@ -1,19 +1,6 @@
 <template>
-    <n-message-provider>
-        <router-view/>
-    </n-message-provider>
+    <router-view/>
 </template>
-
-<script>
-import {defineComponent} from 'vue';
-import {NMessageProvider} from 'naive-ui';
-
-export default defineComponent({
-    components: {NMessageProvider},
-    setup() {
-    }
-});
-</script>
 
 <style>
 html {

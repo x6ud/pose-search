@@ -73,7 +73,7 @@
                  ref="searchResultDom"
             >
                 <div class="loading" v-if="dbLoading && !searchResult?.length">
-                    Loading database, this may take more than 10 seconds
+                    Loading data...
                 </div>
                 <div class="warning"
                      v-if="!searchResult?.length && (!supportWebGL2 || !supportMouse)"

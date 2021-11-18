@@ -1,13 +1,13 @@
 import {KeyOutlined, LeftOutlined, RightOutlined, SaveFilled, SearchOutlined} from '@vicons/antd';
-import {NButton, NIcon, NInput, NRadio, NTag, useMessage} from 'naive-ui';
+import {NButton, NIcon, NInput, NRadio} from 'naive-ui';
 import {defineComponent, onMounted, ref, watch} from 'vue';
 import NormalizedLandmarksCanvas from '../components/NormalizedLandmarksCanvas/NormalizedLandmarksCanvas.vue';
 import SkeletonModelCanvas from '../components/SkeletonModelCanvas/SkeletonModelCanvas.vue';
 import WorldLandmarksCanvas from '../components/WorldLandmarksCanvas/WorldLandmarksCanvas.vue';
-import PhotoDatabase from '../utils/db/PhotoDatabase';
 import {detectPose} from '../utils/detect-pose';
 import {loadImage} from '../utils/image';
 import Photo, {getPhotoGenderByTags} from '../utils/Photo';
+import PhotoDataset from '../utils/PhotoDataset';
 import {unsplashGetPhoto, unsplashSearchPhotos, UnsplashSearchPhotosResult} from '../utils/unsplash';
 
 const LOCAL_STORAGE_KEY__UNSPLASH_ACCESS_KEY = 'unsplash-access-key';
@@ -18,7 +18,6 @@ export default defineComponent({
         NIcon,
         NInput,
         NRadio,
-        NTag,
 
         KeyOutlined,
         SearchOutlined,
@@ -31,7 +30,7 @@ export default defineComponent({
         SkeletonModelCanvas,
     },
     setup: function () {
-        const database = new PhotoDatabase();
+        const dataset = new PhotoDataset();
 
         const numOfRecords = ref(0);
         const dbLoading = ref(false);
@@ -47,13 +46,11 @@ export default defineComponent({
         const modelRunning = ref(false);
         const modelHasBeenRun = ref(false);
 
-        const message = useMessage();
-
         onMounted(async function () {
             try {
                 dbLoading.value = true;
-                await database.init();
-                numOfRecords.value = database.countRecords();
+                await dataset.load();
+                numOfRecords.value = dataset.data.length;
             } finally {
                 dbLoading.value = false;
             }
@@ -97,7 +94,7 @@ export default defineComponent({
         }
 
         async function selectPhoto(id: string) {
-            const record = database.queryPhotoById(id);
+            const record = dataset.findById(id);
             if (record) {
                 recordInserted.value = true;
                 photo.value = record;
@@ -114,7 +111,6 @@ export default defineComponent({
                 photo.value.authorName = details.author.name;
                 photo.value.authorUsername = details.author.username;
                 photo.value.gender = getPhotoGenderByTags(details.tags);
-                photo.value.tags = details.tags;
             }
         }
 
@@ -133,7 +129,7 @@ export default defineComponent({
         function addRecord() {
             try {
                 dbLoading.value = true;
-                database.addPhoto(photo.value);
+                dataset.add(photo.value);
                 recordInserted.value = true;
                 numOfRecords.value += 1;
             } finally {
@@ -141,21 +137,17 @@ export default defineComponent({
             }
         }
 
-        async function saveDatabase() {
+        async function saveDataJson() {
             try {
                 dbLoading.value = true;
-                await database.saveToFile();
+                await dataset.writeToFile();
             } finally {
                 dbLoading.value = false;
             }
         }
 
         function onPhotoGenderChange(e: InputEvent) {
-            const value = Number((e.target as HTMLInputElement).value);
-            if (recordInserted.value) {
-                database.updatePhotoGender(photo.value.id, value);
-            }
-            photo.value.gender = value;
+            photo.value.gender = Number((e.target as HTMLInputElement).value);
         }
 
         return {
@@ -181,7 +173,7 @@ export default defineComponent({
 
             runModel,
             addRecord,
-            saveDatabase,
+            saveDataJson,
             onPhotoGenderChange,
         };
     }

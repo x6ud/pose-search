@@ -174,7 +174,7 @@
                 <template #icon>
                     <save-filled/>
                 </template>
-                Save data.json
+                Save JSON
             </n-button>
         </div>
     </div>

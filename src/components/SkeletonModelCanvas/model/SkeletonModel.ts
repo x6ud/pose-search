@@ -77,20 +77,52 @@ export default class SkeletonModel {
 
     async init() {
         // =============== load objs ===============
-        const headVertices = new ObjLoader().load((await import('./obj/head.obj')).default);
-        const trunkVertices = new ObjLoader().load((await import('./obj/trunk.obj')).default);
-        const leftUpperArmVertices = new ObjLoader().load((await import('./obj/left-upper-arm.obj')).default);
-        const leftLowerArmVertices = new ObjLoader().load((await import('./obj/left-lower-arm.obj')).default);
-        const leftHandVertices = new ObjLoader().load((await import('./obj/left-hand.obj')).default);
-        const rightUpperArmVertices = new ObjLoader().load((await import('./obj/right-upper-arm.obj')).default);
-        const rightLowerArmVertices = new ObjLoader().load((await import('./obj/right-lower-arm.obj')).default);
-        const rightHandVertices = new ObjLoader().load((await import('./obj/right-hand.obj')).default);
-        const leftThighVertices = new ObjLoader().load((await import('./obj/left-thigh.obj')).default);
-        const leftCalfVertices = new ObjLoader().load((await import('./obj/left-calf.obj')).default);
-        const leftFootVertices = new ObjLoader().load((await import('./obj/left-foot.obj')).default);
-        const rightThighVertices = new ObjLoader().load((await import('./obj/right-thigh.obj')).default);
-        const rightCalfVertices = new ObjLoader().load((await import('./obj/right-calf.obj')).default);
-        const rightFootVertices = new ObjLoader().load((await import('./obj/right-foot.obj')).default);
+        const headObjPromise = import('./obj/head.obj');
+        const trunkObjPromise = import('./obj/trunk.obj');
+        const leftUpperArmObjPromise = import('./obj/left-upper-arm.obj');
+        const leftLowerArmObjPromise = import('./obj/left-lower-arm.obj');
+        const leftHandObjPromise = import('./obj/left-hand.obj');
+        const rightUpperArmObjPromise = import('./obj/right-upper-arm.obj');
+        const rightLowerArmObjPromise = import('./obj/right-lower-arm.obj');
+        const rightHandObjPromise = import('./obj/right-hand.obj');
+        const leftThighObjPromise = import('./obj/left-thigh.obj');
+        const leftCalfObjPromise = import('./obj/left-calf.obj');
+        const leftFootObjPromise = import('./obj/left-foot.obj');
+        const rightThighObjPromise = import('./obj/right-thigh.obj');
+        const rightCalfObjPromise = import('./obj/right-calf.obj');
+        const rightFootObjPromise = import('./obj/right-foot.obj');
+
+        await Promise.all([
+            headObjPromise,
+            trunkObjPromise,
+            leftUpperArmObjPromise,
+            leftLowerArmObjPromise,
+            leftHandObjPromise,
+            rightUpperArmObjPromise,
+            rightLowerArmObjPromise,
+            rightHandObjPromise,
+            leftThighObjPromise,
+            leftCalfObjPromise,
+            leftFootObjPromise,
+            rightThighObjPromise,
+            rightCalfObjPromise,
+            rightFootObjPromise,
+        ]);
+
+        const headVertices = new ObjLoader().load((await headObjPromise).default);
+        const trunkVertices = new ObjLoader().load((await trunkObjPromise).default);
+        const leftUpperArmVertices = new ObjLoader().load((await leftUpperArmObjPromise).default);
+        const leftLowerArmVertices = new ObjLoader().load((await leftLowerArmObjPromise).default);
+        const leftHandVertices = new ObjLoader().load((await leftHandObjPromise).default);
+        const rightUpperArmVertices = new ObjLoader().load((await rightUpperArmObjPromise).default);
+        const rightLowerArmVertices = new ObjLoader().load((await rightLowerArmObjPromise).default);
+        const rightHandVertices = new ObjLoader().load((await rightHandObjPromise).default);
+        const leftThighVertices = new ObjLoader().load((await leftThighObjPromise).default);
+        const leftCalfVertices = new ObjLoader().load((await leftCalfObjPromise).default);
+        const leftFootVertices = new ObjLoader().load((await leftFootObjPromise).default);
+        const rightThighVertices = new ObjLoader().load((await rightThighObjPromise).default);
+        const rightCalfVertices = new ObjLoader().load((await rightCalfObjPromise).default);
+        const rightFootVertices = new ObjLoader().load((await rightFootObjPromise).default);
 
         // =============== move rotation origins to joint connection points ===============
         const headOffset: [number, number, number] = [

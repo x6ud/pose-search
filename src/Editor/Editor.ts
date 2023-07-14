@@ -4,7 +4,7 @@ import {defineComponent, onMounted, ref, watch} from 'vue';
 import NormalizedLandmarksCanvas from '../components/NormalizedLandmarksCanvas/NormalizedLandmarksCanvas.vue';
 import SkeletonModelCanvas from '../components/SkeletonModelCanvas/SkeletonModelCanvas.vue';
 import WorldLandmarksCanvas from '../components/WorldLandmarksCanvas/WorldLandmarksCanvas.vue';
-import {detectPose} from '../utils/detect-pose';
+import {detectPoseWorker} from '../utils/detect-pose-worker';
 import {loadImage} from '../utils/image';
 import Photo, {getPhotoGenderByTags} from '../utils/Photo';
 import PhotoDataset from '../utils/PhotoDataset';
@@ -117,7 +117,7 @@ export default defineComponent({
         async function runModel() {
             try {
                 modelRunning.value = true;
-                const pose = await detectPose(await loadImage(photo.value.regular));
+                const pose = await detectPoseWorker(await loadImage(photo.value.regular));
                 photo.value.normalizedLandmarks = pose.normalizedLandmarks;
                 photo.value.worldLandmarks = pose.worldLandmarks;
             } finally {
